@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,6 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "Transction")
 public class Transaction {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "transaction_id")
     private int transactionId;
 
@@ -31,18 +34,18 @@ public class Transaction {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "type", nullable = false)
+    @JoinColumn(name = "type_id", nullable = false)
     private Type type;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserAccount user;
 
-    // constructors, getters, and setters
+    // constructors
+    public Transaction() {}
 
-    public Transaction(int transactionId, LocalDate transactionDate, BigDecimal transactionAmount,
+    public Transaction(LocalDate transactionDate, BigDecimal transactionAmount,
             String transactionNote, Category category, Type type, UserAccount user) {
-        this.transactionId = transactionId;
         this.transactionDate = transactionDate;
         this.transactionAmount = transactionAmount;
         this.transactionNote = transactionNote;
@@ -51,12 +54,9 @@ public class Transaction {
         this.user = user;
     }
 
+    // getters and setters
     public int getTransactionId() {
         return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
     }
 
     public LocalDate getTransactionDate() {

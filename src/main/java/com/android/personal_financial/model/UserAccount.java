@@ -1,5 +1,7 @@
 package com.android.personal_financial.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,23 +20,23 @@ public class UserAccount {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    // constructors, getters, and setters
-
+    // constructors
     public UserAccount() {}
 
-    public UserAccount(int userId, String username, String password, String email) {
-        this.userId = userId;
+    public UserAccount(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
+    // getters and setters
     public int getUserId() {
         return userId;
     }

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,6 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "Budget_Planning")
 public class BudgetPlanning {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "budget_id")
     private int budgetId;
 
@@ -30,23 +33,20 @@ public class BudgetPlanning {
     @JoinColumn(name = "user_id", nullable = false)
     private UserAccount user;
 
-    // constructors, getters, and setters
+    // constructors
+    public BudgetPlanning() {}
 
-    public BudgetPlanning(int budgetId, BigDecimal incomeTarget, BigDecimal expenseTarget, LocalDate monthYear,
+    public BudgetPlanning(BigDecimal incomeTarget, BigDecimal expenseTarget, LocalDate monthYear,
             UserAccount user) {
-        this.budgetId = budgetId;
         this.incomeTarget = incomeTarget;
         this.expenseTarget = expenseTarget;
         this.monthYear = monthYear;
         this.user = user;
     }
 
+    // getters and setters
     public int getBudgetId() {
         return budgetId;
-    }
-
-    public void setBudgetId(int budgetId) {
-        this.budgetId = budgetId;
     }
 
     public BigDecimal getIncomeTarget() {

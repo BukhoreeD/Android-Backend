@@ -1,18 +1,42 @@
-// package com.android.personal_financial.controller;
+package com.android.personal_financial.controller;
 
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
-// import com.android.personal_financial.repository.CategoryRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// @RestController
-// @RequestMapping("/categories")
-// public class CategoryController {
-//     private final CategoryRepository categoryRepository;
+import com.android.personal_financial.model.Category;
+import com.android.personal_financial.service.CategoryService;
 
-//     public CategoryController(CategoryRepository categoryRepository) {
-//         this.categoryRepository = categoryRepository;
-//     }
+@RestController
+@RequestMapping("/categories")
+public class CategoryController {
 
-//     // REST API endpoints for category operations
-// }
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> getCategoryById(@PathVariable("id") int categoryId) {
+        Category category = categoryService.getCategoryById(categoryId);
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(category);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = categoryService.getAllCategories();
+        if (categories.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(categories);
+    }
+}
+

@@ -15,7 +15,7 @@ import com.android.personal_financial.service.TokenService;
 import com.android.personal_financial.service.UserAccountService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/auth")
 public class UserAccountController {
     private final UserAccountService userAccountService;
     private final TokenService tokenService;
