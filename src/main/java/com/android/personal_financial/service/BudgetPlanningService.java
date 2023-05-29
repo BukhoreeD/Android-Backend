@@ -22,7 +22,7 @@ public class BudgetPlanningService {
         BudgetPlanning budgetPlanning = new BudgetPlanning();
         budgetPlanning.setIncomeTarget(request.getIncomeTarget());
         budgetPlanning.setMonthYear(request.getMonthYear());
-        // Set other properties as needed
+        budgetPlanning.setUser(request.getUser());
         return budgetPlanningRepository.save(budgetPlanning);
     }
 
@@ -30,7 +30,7 @@ public class BudgetPlanningService {
         BudgetPlanning budgetPlanning = new BudgetPlanning();
         budgetPlanning.setExpenseTarget(request.getExpenseTarget());
         budgetPlanning.setMonthYear(request.getMonthYear());
-        // Set other properties as needed
+        budgetPlanning.setUser(request.getUser());
         return budgetPlanningRepository.save(budgetPlanning);
     }
 
