@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.android.personal_financial.model.Transaction;
@@ -62,5 +63,23 @@ public class TransactionController {
     public ResponseEntity<BigDecimal> getTotalBalance() {
         BigDecimal totalBalance = transactionService.getTotalBalance();
         return ResponseEntity.ok(totalBalance);
+    }
+
+    @GetMapping("/income/total")
+    public ResponseEntity<Double> getTotalIncome(
+            @RequestParam(name = "month") int month,
+            @RequestParam(name = "year") int year
+    ) {
+        Double totalIncome = transactionService.getTotalIncome(month, year);
+        return ResponseEntity.ok(totalIncome);
+    }
+
+    @GetMapping("/expense/total")
+    public ResponseEntity<Double> getTotalExpense(
+            @RequestParam(name = "month") int month,
+            @RequestParam(name = "year") int year
+    ) {
+        Double totalExpense = transactionService.getTotalExpense(month, year);
+        return ResponseEntity.ok(totalExpense);
     }
 }

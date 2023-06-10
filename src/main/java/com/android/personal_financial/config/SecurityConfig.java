@@ -24,7 +24,7 @@ public class SecurityConfig {
     http.csrf(csrf -> csrf.disable())
         .cors(cors -> cors.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/register", "/auth/login").anonymous()
+        .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/register", "/auth/login", "/auth/forgot-password", "/auth/reset-password").anonymous()
         .anyRequest().authenticated())
         .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 

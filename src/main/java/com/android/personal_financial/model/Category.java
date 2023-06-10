@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,10 @@ public class Category {
 
     @Column(name = "category_name", nullable = false)
     private String categoryName;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id", nullable = false)
+    private Type type;
 
     // constructors
     public Category() {
@@ -41,5 +47,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }

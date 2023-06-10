@@ -10,3 +10,14 @@ spring:
         jackson:
             deserialization:
                 fail-on-unknown-properties: true
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: khoree602@gmail.com
+        password: zgrdzlxwqbfhepri
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true

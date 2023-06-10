@@ -1,6 +1,7 @@
 package com.android.personal_financial.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -58,5 +59,17 @@ public class TransactionService {
     public BigDecimal getTotalBalance() {
         // Retrieve the total balance by summing the transaction amounts
         return transactionRepository.getTotalBalance();
+    }
+
+    public Double getTotalIncome(int month, int year) {
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.plusMonths(1);
+        return Double.parseDouble(transactionRepository.getTotalIncome(startDate, endDate).toString());
+    }
+
+    public Double getTotalExpense(int month, int year) {
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.plusMonths(1);
+        return Double.parseDouble(transactionRepository.getTotalExpense(startDate, endDate).toString());
     }
 }
